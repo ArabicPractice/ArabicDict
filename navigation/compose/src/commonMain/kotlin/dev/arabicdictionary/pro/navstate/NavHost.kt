@@ -2,6 +2,7 @@
 
 package dev.arabicdictionary.pro.navstate
 
+
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

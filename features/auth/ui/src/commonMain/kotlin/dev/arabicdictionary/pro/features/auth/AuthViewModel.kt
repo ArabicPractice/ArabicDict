@@ -78,8 +78,8 @@ internal class AuthViewModel(
     fun onEvent(event: AuthEvent) {
         when (event) {
             is AuthEvent.OnNextClicked -> onNextClicked()
-            is AuthEvent.OnRequestTokenClick -> navigator.open(ARABICDICT_CREATE_TOKEN_URL)
-            is AuthEvent.OnSignUpClick -> navigator.open(ARABICDICT_REGISTER_URL)
+            is AuthEvent.OnRequestTokenClick -> {} //navigator.open(ARABICDICT_CREATE_TOKEN_URL)
+            is AuthEvent.OnSignUpClick -> {} //navigator.open(ARABICDICT_REGISTER_URL)
             is AuthEvent.OnUserAuthTextChanged -> onUserAuthTextChanged(event.text)
             is AuthEvent.OnLanguageChange -> {
                 localization.applyLanguage(event.iso)

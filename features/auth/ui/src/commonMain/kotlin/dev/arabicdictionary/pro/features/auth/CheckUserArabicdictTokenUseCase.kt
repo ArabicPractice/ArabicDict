@@ -1,8 +1,6 @@
 package dev.arabicdictionary.pro.features.auth
 
-import dev.arabicdictionary.pro.arabicdictsdk.Response
-import dev.arabicdictionary.pro.arabicdictsdk.data.DeveloperToken
-import dev.arabicdictionary.pro.arabicdictsdk.validateArabicdictDeveloperToken
+import kotlinx.coroutines.delay
 
 /**
  * Verify that dev token is valid and cen vbe used to access ArabicDict API.
@@ -11,21 +9,25 @@ import dev.arabicdictionary.pro.arabicdictsdk.validateArabicdictDeveloperToken
 internal class CheckUserArabicdictTokenUseCase {
     @Suppress("TooGenericExceptionCaught", "SwallowedException", "MagicNumber")
     suspend operator fun invoke(arabicdictToken: String): Result {
-        try {
-            val response = validateArabicdictDeveloperToken(DeveloperToken(arabicdictToken))
-            return when {
-                response is Response.Success -> Result.VALID
-                response is Response.NetworkError ->
-                    when {
-                        response.httpCode == 401 -> Result.INVALID
-                        response.httpCode / 500 == 1 -> Result.SERVER_ERROR
-                        else -> Result.UNKNOWN_ERROR
-                    }
-                else -> Result.UNKNOWN_ERROR
-            }
-        } catch (_: Exception) {
-            return Result.UNKNOWN_ERROR
-        }
+        delay(1000)
+
+        return Result.VALID
+//        try {
+//            val response = validateArabicdictDeveloperToken(DeveloperToken(arabicdictToken))
+//            return when {
+//                response is Response.Success -> Result.VALID
+//                response is Response.NetworkError ->
+//                    when {
+//                        response.httpCode == 401 -> Result.INVALID
+//                        response.httpCode / 500 == 1 -> Result.SERVER_ERROR
+//                        else -> Result.UNKNOWN_ERROR
+//                    }
+//                else -> Result.UNKNOWN_ERROR
+//            }
+//        } catch (_: Exception) {
+//            return Result.UNKNOWN_ERROR
+//        }
+
     }
 
     enum class Result {

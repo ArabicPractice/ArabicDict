@@ -12,9 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.arabicdictionary.pro.common.features.ArabicDictNavGraph
-import dev.arabicdictionary.pro.core.uikit.ArabicDictTheme
-import dev.arabicdictionary.pro.core.uikit.localization.LocalizationChanger
-import dev.arabicdictionary.pro.core.uikit.localization.PlatformContext
 import dev.arabicdictionary.pro.core.utils.UrlLauncher
 import dev.arabicdictionary.pro.features.auth.AuthPane
 import dev.arabicdictionary.pro.navstate.NavCommand
@@ -29,6 +26,9 @@ import dev.arabicdictionary.pro.navstate.buildNavState
 import dev.arabicdictionary.pro.navstate.deeplink.SimpleUriPattern
 import dev.arabicdictionary.pro.navstate.rememberNavTopEntry
 import dev.arabicdictionary.pro.navstate.stack.NavStack
+import dev.arabicdictionary.pro.core.uikit.ArabicDictTheme
+import dev.arabicdictionary.pro.core.uikit.localization.LocalizationChanger
+import dev.arabicdictionary.pro.core.uikit.localization.PlatformContext
 import org.koin.compose.KoinContext
 import org.koin.compose.LocalKoinApplication
 import org.koin.compose.module.rememberKoinModules
@@ -75,13 +75,16 @@ fun ArabicDictComposeApp(
                         ) {
                             val navTopEntry = rememberNavTopEntry()
                             AnimatedContent(navTopEntry) { navEntry ->
+                                println("Переход на экран: $navEntry")
                                 when (navEntry.destination as ArabicDictNavGraph.Dest) {
                                     is ArabicDictNavGraph.Dest.AssetNavigator -> StubScreen("Asset Navigator")
                                     is ArabicDictNavGraph.Dest.Auth -> AuthPane(onChangeLanguage = {
                                         viewModel.update(it)
                                         LocalizationChanger.update(it)
                                     })
-                                    is ArabicDictNavGraph.Dest.ProjectNavigator -> StubScreen("Project Navigator")
+                                    is ArabicDictNavGraph.Dest.ProjectNavigator -> {
+                                        StubScreen("Project Navigator")
+                                    }
                                     is ArabicDictNavGraph.Alias -> error("Impossible to open alias")
                                 }
                             }

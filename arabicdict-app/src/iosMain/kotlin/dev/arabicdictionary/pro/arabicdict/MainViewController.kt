@@ -25,7 +25,7 @@ fun MainViewController() =
         content = {
             ArabicDictComposeApp(
                 platformContext = locale.INSTANCE,
-                onRootBack = {}
+                onRootBack = { }
             )
         },
     )

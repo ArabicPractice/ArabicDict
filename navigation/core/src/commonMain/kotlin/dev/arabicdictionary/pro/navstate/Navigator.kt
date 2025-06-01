@@ -77,7 +77,7 @@ public class Navigator(
     }
 
     public fun addInterceptor(interceptor: NavInterceptor) {
-        this.interceptors = interceptors + interceptor
+        this.interceptors += interceptor
     }
 
     override fun close() {
